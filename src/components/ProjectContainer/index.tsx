@@ -14,7 +14,7 @@ import {
   faSquareCaretDown,
   faSquareCaretUp,
   faSquarePen,
-  faTimesRectangle
+  faTimesRectangle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { animated, useTransition } from "@react-spring/web";
@@ -48,7 +48,7 @@ const ProjectContainer = ({
   const { addTask, deleteProject } = useProjectContext();
   const [expanded, setExpanded] = useState<boolean>(true);
 
-  const [displayTasks, setDisplayTasks] = useState<any>([]);
+  const [displayTasks, setDisplayTasks] = useState<any>(tasks);
   const [newTask, setNewTask] = useState<string>("");
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const ProjectContainer = ({
     }
   };
 
-  const transition = useTransition(tasks, {
+  const transition = useTransition(displayTasks, {
     from: { opacity: 0, marginTop: 5 },
     enter: { opacity: 1, maxHeight: 50, marginTop: 10 },
     leave: { opacity: 0, maxHeight: 0, marginTop: 0 },
