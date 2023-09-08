@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.bcd70c0a.css",
-    "main.js": "/static/js/main.a9246ab8.js",
+    "main.css": "/static/css/main.b26f0244.css",
+    "main.js": "/static/js/main.912ca2ca.js",
     "static/js/787.8c19c428.chunk.js": "/static/js/787.8c19c428.chunk.js",
     "static/media/Montserrat-Italic-VariableFont_wght.ttf": "/static/media/Montserrat-Italic-VariableFont_wght.ef11b720b9a6cfb9a317.ttf",
     "static/media/Montserrat-VariableFont_wght.ttf": "/static/media/Montserrat-VariableFont_wght.3faa3eef13649db02044.ttf",
     "static/media/BebasNeue-Regular.ttf": "/static/media/BebasNeue-Regular.12e3683f9192436a7be8.ttf",
     "index.html": "/index.html",
-    "main.bcd70c0a.css.map": "/static/css/main.bcd70c0a.css.map",
-    "main.a9246ab8.js.map": "/static/js/main.a9246ab8.js.map",
+    "main.b26f0244.css.map": "/static/css/main.b26f0244.css.map",
+    "main.912ca2ca.js.map": "/static/js/main.912ca2ca.js.map",
     "787.8c19c428.chunk.js.map": "/static/js/787.8c19c428.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bcd70c0a.css",
-    "static/js/main.a9246ab8.js"
+    "static/css/main.b26f0244.css",
+    "static/js/main.912ca2ca.js"
   ]
 }
