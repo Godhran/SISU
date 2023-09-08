@@ -27,10 +27,10 @@ const NewProjectContainer = () => {
 
   return (
     <div
-      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-3 h-full drop-shadow-md`}
+      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-4 h-full drop-shadow-md`}
       style={{ backgroundColor: Colours.light, color: Colours.dark }}
     >
-      <div className="px-2 py-4">
+      <div>
         <div className="flex justify-between align-center">
           <div
             className="font-bold text-4xl mb-2"

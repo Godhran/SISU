@@ -116,7 +116,7 @@ const ProjectContainer = ({
 
   return (
     <div
-      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-3 h-full`}
+      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-4 h-full`}
       style={{ backgroundColor: Colours.light, color: Colours.dark }}
     >
       {tasks.length > 0 ? (
@@ -147,18 +147,18 @@ const ProjectContainer = ({
         />
       </div>
 
-      <div className="px-2 pt-4">
-        <div className="font-bold text-xl mb-2 text-ellipsis overflow-hidden">
+      <div className="mt-4">
+        <div className="font-bold text-xl mb-2 text-ellipsis overflow-hidden" style={{fontFamily:'Montserrat'}}>
           {title}
         </div>
       </div>
 
       <Collapse maxHeight={taskHeight} expanded={expanded}>
         <div ref={collapseDivRef}>
-          <div className="px-2 pb-4">
-            <p className={`text-base break-words`}>{description}</p>
-            <p className={`text-base font-semibold py-2`}>
-              {tasks.length > 1
+          <div className="mb-4">
+            <p className={`text-base break-words italic`} style={{fontFamily:'Montserrat'}}>{description}</p>
+            <p className={`text-base font-semibold py-2`} style={{fontFamily:'Montserrat'}}>
+              {tasks.length !== 1
                 ? copy.items.replace("{number}", `${tasks.length}`)
                 : copy.item.replace("{number}", `${tasks.length}`)}
             </p>

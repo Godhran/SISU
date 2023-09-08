@@ -22,7 +22,7 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
   const groupedTasks = groupByType(tasks, "type");
 
   return (
-    <div className="flex w-full h-5 bg-gray-200 rounded overflow-hidden dark:bg-gray-700 drop-shadow-md">
+    <div className="flex w-full h-5 rounded overflow-hidden">
       {groupedTasks.completed && groupedTasks.completed.length > 0 ? (
         <Segment
           count={groupedTasks.completed.length}

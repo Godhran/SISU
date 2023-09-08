@@ -1,8 +1,8 @@
 export const Colours = {
   light: "#fbfbfb",
   dark: "#554d56",
-  blocked: "#ee6723",
-  completed: "#cBcf2d",
-  todo: "#c1bec1",
-  inProgress: "#419bf9",
+  blocked: "#ff7531",
+  completed: "#f3f859",
+  todo: "#c3c0c3",
+  inProgress: "#7bc9ff",
 };
