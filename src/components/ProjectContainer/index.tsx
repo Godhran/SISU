@@ -13,17 +13,16 @@ import {
 import {
   faSquareCaretDown,
   faSquareCaretUp,
-  faSquarePen,
-  faTimesRectangle,
+  faTimesRectangle
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { animated, useTransition } from "@react-spring/web";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TTask, useProjectContext } from "../../context";
 import { Colours } from "../../styles/colours";
 import DistributionBar from "../DistributionBar";
-import TaskButton from "../TaskButton";
-import { Input } from "./component.style";
+import TaskItem from "../TaskItem";
+import { Collapse, Input } from "./component.style";
 
 type TProductContainer = {
   title: string;
@@ -34,8 +33,9 @@ type TProductContainer = {
 };
 
 const copy = {
-  limitAdvice: " consider breaking your projects down into managable chunks",
-  limitReached: "10/10 Task limit reached - ",
+  input: "I will...",
+  item: "{number} item",
+  items: "{number} items",
 };
 
 const ProjectContainer = ({
@@ -45,11 +45,20 @@ const ProjectContainer = ({
   index,
   id,
 }: TProductContainer) => {
-  const { addTask, deleteProject } = useProjectContext();
+  const { addTask, deleteProject, projects } = useProjectContext();
   const [expanded, setExpanded] = useState<boolean>(true);
-
+  const [taskHeight, setHeightOfTasks] = useState<number>(4000);
+  const collapseDivRef = useRef<any>(null);
   const [displayTasks, setDisplayTasks] = useState<any>(tasks);
   const [newTask, setNewTask] = useState<string>("");
+
+  const getContainerHeight = () => {
+    setHeightOfTasks(collapseDivRef?.current?.clientHeight + 200);
+  };
+
+  useEffect(() => {
+    getContainerHeight();
+  }, [projects]);
 
   useEffect(() => {
     setDisplayTasks(tasks);
@@ -88,14 +97,14 @@ const ProjectContainer = ({
 
   const transition = useTransition(displayTasks, {
     from: { opacity: 0, marginTop: 5 },
-    enter: { opacity: 1, maxHeight: 50, marginTop: 10 },
+    enter: { opacity: 1, maxHeight: 500, marginTop: 10 },
     leave: { opacity: 0, maxHeight: 0, marginTop: 0 },
   });
 
   const fadeInListItems = transition((style, item) => {
     return (
       <animated.div style={style}>
-        <TaskButton
+        <TaskItem
           id={item.id}
           title={item.title}
           type={item.type}
@@ -107,7 +116,7 @@ const ProjectContainer = ({
 
   return (
     <div
-      className={`mx-auto max-w-sm rounded overflow-hidden shadow-lg p-3 h-full`}
+      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-3 h-full`}
       style={{ backgroundColor: Colours.light, color: Colours.dark }}
     >
       {tasks.length > 0 ? (
@@ -117,8 +126,13 @@ const ProjectContainer = ({
           filter={filter}
         />
       ) : null}
-      <div className="flex justify-between py-3 px-3">
-        <FontAwesomeIcon icon={faSquarePen} size="2x" opacity={0.5} />
+
+      <div className="flex justify-between py-3">
+        <FontAwesomeIcon
+          icon={faTimesRectangle}
+          size="2x"
+          color='transparent'
+        />
         <FontAwesomeIcon
           icon={expanded ? faSquareCaretUp : faSquareCaretDown}
           size="2x"
@@ -134,35 +148,37 @@ const ProjectContainer = ({
       </div>
 
       <div className="px-2 pt-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-      </div>
-      <div
-        // className="!visible hidden"
-        // className={`transition-all duration-300 ${expanded ? `hidden` : "visible"}`}
-        className={`transition-all duration-300 ${
-          expanded ? `max-h-[1200px] opacity-100` : "max-h-[0px] opacity-0 q"
-        }`}
-      >
-        <div className="px-2 pb-4">
-          <p className={`text-base`}>{description}</p>
+        <div className="font-bold text-xl mb-2 text-ellipsis overflow-hidden">
+          {title}
         </div>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={displayTasks.map((i: { id: string }) => i.id)}
-            strategy={verticalListSortingStrategy}
+      </div>
+
+      <Collapse maxHeight={taskHeight} expanded={expanded}>
+        <div ref={collapseDivRef}>
+          <div className="px-2 pb-4">
+            <p className={`text-base break-words`}>{description}</p>
+            <p className={`text-base font-semibold py-2`}>
+              {tasks.length > 1
+                ? copy.items.replace("{number}", `${tasks.length}`)
+                : copy.item.replace("{number}", `${tasks.length}`)}
+            </p>
+          </div>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
           >
-            {fadeInListItems}
-          </SortableContext>
-        </DndContext>
-        {tasks.length < 10 ? (
+            <SortableContext
+              items={displayTasks.map((i: { id: string }) => i.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {fadeInListItems}
+            </SortableContext>
+          </DndContext>
           <div className="pt-5">
             <Input
-              placeholder={"I should..."}
-              label={"I should..."}
+              placeholder={copy.input}
+              label={copy.input}
               value={newTask}
               onChange={(e) => {
                 setNewTask(e.target.value);
@@ -175,15 +191,8 @@ const ProjectContainer = ({
               }}
             />
           </div>
-        ) : (
-          <div className="pt-5">
-            <span className={`text-base`}>
-              <span className={`text-base font-bold`}>{copy.limitReached}</span>
-              <span className={`text-base`}>{copy.limitAdvice}</span>
-            </span>
-          </div>
-        )}
-      </div>
+        </div>
+      </Collapse>
     </div>
   );
 };

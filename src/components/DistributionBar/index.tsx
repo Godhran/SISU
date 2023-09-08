@@ -1,3 +1,4 @@
+import { TTask } from "@context/index";
 import { Segment } from "./component.style";
 
 type TDistributionBar = {
@@ -6,14 +7,9 @@ type TDistributionBar = {
   onFilter: (value: string) => void;
 };
 
-type TTask = {
-  title: string;
-  type: string;
-};
-
 const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
   function groupByType<T>(arr: T[], property: keyof T): Record<string, T[]> {
-    return arr.reduce((result, obj) => {
+    return arr.reduce((result, obj: any) => {
       const key = String(obj[property]);
       if (!result[key]) {
         result[key] = [];
@@ -37,33 +33,32 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
         />
       ) : null}
 
-      {groupedTasks.priority && groupedTasks.priority.length > 0 ? (
+      {groupedTasks.blocked && groupedTasks.blocked.length > 0 ? (
         <Segment
-          count={groupedTasks.priority.length}
+          count={groupedTasks.blocked.length}
           length={tasks.length}
-          type={"priority"}
-          onClick={() => onFilter("priority")}
-          filtered={!!filter && filter !== "priority"}
+          type={"blocked"}
+          onClick={() => onFilter("blocked")}
+          filtered={!!filter && filter !== "blocked"}
         />
       ) : null}
 
-      {groupedTasks.warning && groupedTasks.warning.length > 0 ? (
+      {groupedTasks.inProgress && groupedTasks.inProgress.length > 0 ? (
         <Segment
-          count={groupedTasks.warning.length}
+          count={groupedTasks.inProgress.length}
           length={tasks.length}
-          type={"warning"}
-          onClick={() => onFilter("warning")}
-          filtered={!!filter && filter !== "warning"}
+          type={"inProgress"}
+          onClick={() => onFilter("inProgress")}
+          filtered={!!filter && filter !== "inProgress"}
         />
       ) : null}
-
-      {groupedTasks.task && groupedTasks.task.length > 0 ? (
+      {groupedTasks.todo && groupedTasks.todo.length > 0 ? (
         <Segment
-          count={groupedTasks.task.length}
+          count={groupedTasks.todo.length}
           length={tasks.length}
-          type={"task"}
-          onClick={() => onFilter("task")}
-          filtered={!!filter && filter !== "task"}
+          type={"todo"}
+          onClick={() => onFilter("todo")}
+          filtered={!!filter && filter !== "todo"}
         />
       ) : null}
     </div>

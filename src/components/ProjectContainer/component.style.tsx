@@ -18,6 +18,22 @@ const container = ({
   </div>
 );
 
+const collapse = ({
+  children,
+  className,
+  expanded,
+  maxHeight,
+}: {
+  children: any;
+  className?: string;
+  expanded: boolean;
+  maxHeight: number;
+}) => (
+  <div className={`transition-all duration-300 ${className}`}>
+    {children}
+  </div>
+);
+
 const button = ({
   label,
   className,
@@ -71,17 +87,22 @@ const input = ({
 }) => (
   <div className={`flex items-center border-b py-2 mb-2 ${className}`}>
     <input
-      className={`appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none`}
+      className={`appearance-none bg-transparent border-none w-full mr-3 py-1 leading-tight focus:outline-none`}
       type="text"
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       aria-label={label}
-      maxLength={30}
+      maxLength={120}
     />
     <FontAwesomeIcon icon={faSquareCheck} size="2x" onClick={onClick} />
   </div>
 );
+
+export const Collapse = styled(collapse)`
+  max-height: ${(props: any) => (props.expanded ? `${props.maxHeight}px` : "0px")};
+  opacity: ${(props: any) => (props.expanded ? 1 : 0)};
+`;
 
 export const Container = styled(container)`
   // height: ${(props: any) => (props.expanded ? "100%" : 0)};
@@ -115,5 +136,6 @@ export const TextButton = styled(textButton)`
 export const Input = styled(input)`
   color: ${(props: any) => Colours.dark};
   font-weight: 700;
+  font-family: 'Montserrat';
   border-color: ${(props: any) => Colours.dark};
 `;

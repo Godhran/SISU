@@ -12,7 +12,7 @@ const button = ({
   onClick: () => void;
 }) => (
   <button
-    className={`w-[50%] text-sm border-4 text-white py-1 px-2 rounded ${className}`}
+    className={`w-full text-sm border-4 text-white py-2 px-3 rounded ${className}`}
     type="button"
     onClick={onClick}
   >
@@ -30,7 +30,7 @@ const textButton = ({
   onClick: () => void;
 }) => (
   <button
-    className={`w-[50%] border-transparent border-4 text-sm py-1 px-2 rounded ${className}`}
+    className={`w-full border-transparent border-4 text-sm py-1 px-2 rounded ${className}`}
     type="button"
     onClick={onClick}
   >
@@ -44,21 +44,24 @@ const input = ({
   className,
   value,
   onChange,
+  maxLength = 20,
 }: {
   placeholder: string;
   label: string;
   className?: string;
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  maxLength?: number;
 }) => (
   <div className={`flex items-center border-b py-2 mb-2 ${className}`}>
     <input
-      className={`appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none`}
+      className={`appearance-none bg-transparent border-none w-full mr-3 py-1 leading-tight focus:outline-none`}
       type="text"
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       aria-label={label}
+      maxLength={maxLength}
     />
   </div>
 );
@@ -68,10 +71,14 @@ export const Button = styled(button)`
   border-color: ${(props: any) => Colours.dark};
   color: white;
   font-weight: 700;
-
+  border: none;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0);
+  transition-duration: 250ms;
+  transition-property: box-shadow;
+  transition-timing-function: ease-in-out;
+  font-family: 'Montserrat';
   &:hover {
-    background-color: ${(props: any) => Colours.completed};
-    border-color: ${(props: any) => Colours.completed};
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
   }
 `;
 
@@ -87,5 +94,6 @@ export const TextButton = styled(textButton)`
 export const Input = styled(input)`
   color: ${(props: any) => Colours.dark};
   font-weight: 700;
+  font-family: 'Montserrat';
   border-color: ${(props: any) => Colours.dark};
 `;
