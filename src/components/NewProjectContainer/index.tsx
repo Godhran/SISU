@@ -39,7 +39,7 @@ const NewProjectContainer = () => {
             {copy.header}
           </div>
           <svg className={'h-[35px]'} viewBox={"0 0 97.942184 69.384674"}>
-            <g fill={Colours.todo} transform="translate(-1.03125,-15.381338)">
+            <g fill={Colours.blocked} transform="translate(-1.03125,-15.381338)">
               <path
                 d="m 93.5,61 c 0,0 -1.6,6.4 -2.1,7.6 -0.4,1.2 -2.9,5.4 -2.9,5.4 0,0 1.4,3.3 1.6,3.9 0.2,0.6 -2.9,1.9 -3.3,2.9 -0.4,1 0.6,1.9 4.5,1.6 3.9,-0.2 5.6,0.2 6.6,-3.9 1.2,-4.1 2.9,-8.9 -4.4,-17.5 z"
                 id="path1"
