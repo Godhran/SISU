@@ -27,7 +27,7 @@ const NewProjectContainer = () => {
 
   return (
     <div
-      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-3 h-full`}
+      className={`mx-auto max-w rounded overflow-hidden shadow-lg p-3 h-full drop-shadow-md`}
       style={{ backgroundColor: Colours.light, color: Colours.dark }}
     >
       <div className="px-2 py-4">

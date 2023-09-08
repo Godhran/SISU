@@ -21,10 +21,8 @@ const segment = ({
     className={`flex flex-col justify-center overflow-hidden ${className}`}
     role="progressbar"
     style={{ width: `${(100 / length) * count}%` }}
-    aria-valuenow={count}
-    aria-valuemin={0}
-    aria-valuemax={length}
     onClick={onClick}
+    aria-hidden="true" 
   />
 );
 
