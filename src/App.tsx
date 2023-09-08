@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <div
-        className="w-full min-h-screen p-5 pb-10 mx-auto mb-10 gap-5 columns-1 sm:columns-2 md:columns-2 lg:columns-4 xl:columns-5  space-y-5"
+        className="w-full min-h-screen p-5 pb-10 mx-auto gap-5 columns-1 sm:columns-2 md:columns-2 lg:columns-4 xl:columns-5  space-y-5"
         style={{ backgroundColor: Colours.dark }}
       >
         <NewProjectContainer />
