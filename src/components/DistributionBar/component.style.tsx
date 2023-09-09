@@ -9,6 +9,7 @@ const segment = ({
   type,
   onClick,
   filtered,
+  testId,
 }: {
   count: number;
   length: number;
@@ -16,22 +17,27 @@ const segment = ({
   className?: any;
   onClick: MouseEventHandler<HTMLDivElement>;
   filtered: boolean;
+  testId: string;
 }) => (
   <div
     className={`flex flex-col justify-center overflow-hidden ${className}`}
     role="progressbar"
-    style={{ width: `${(100 / length) * count}%` }}
     onClick={onClick}
-    aria-hidden="true" 
+    aria-hidden="true"
+    data-testid={testId}
   />
 );
 
 export const Segment = styled(segment)`
-  background-color: ${(props: any) =>
-    !props.filtered
-      ? Colours[props.type as keyof typeof Colours]
-      : Colours.dark};
-
+  background-color: ${({
+    filtered,
+    type,
+  }: {
+    filtered: boolean;
+    type: string;
+  }) => (!filtered ? Colours[type as keyof typeof Colours] : Colours.dark)};
+  width: ${({ length, count }: { length: number; count: number }) =>
+    `${(100 / length) * count}%`};
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0);
   transition-duration: 250ms;
   transition-property: box-shadow;

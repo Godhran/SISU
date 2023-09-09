@@ -7,6 +7,14 @@ type TDistributionBar = {
   onFilter: (value: string) => void;
 };
 
+const testId = {
+  container: "distributionBarContainer",
+  completedSegment: "distributionBarCompletedSegment",
+  blockedSegment: "distributionBarBlockedSegment",
+  todoSegment: "distributionBarToDoSegment",
+  inProgressSegment: "distributionBarInProgressSegment",
+};
+
 const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
   function groupByType<T>(arr: T[], property: keyof T): Record<string, T[]> {
     return arr.reduce((result, obj: any) => {
@@ -22,7 +30,10 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
   const groupedTasks = groupByType(tasks, "type");
 
   return (
-    <div className="flex w-full h-5 rounded overflow-hidden">
+    <div
+      data-testid={testId.container}
+      className="flex w-full h-5 rounded overflow-hidden"
+    >
       {groupedTasks.completed && groupedTasks.completed.length > 0 ? (
         <Segment
           count={groupedTasks.completed.length}
@@ -30,6 +41,7 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
           type={"completed"}
           onClick={() => onFilter("completed")}
           filtered={!!filter && filter !== "completed"}
+          testId={testId.completedSegment}
         />
       ) : null}
 
@@ -40,6 +52,7 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
           type={"blocked"}
           onClick={() => onFilter("blocked")}
           filtered={!!filter && filter !== "blocked"}
+          testId={testId.blockedSegment}
         />
       ) : null}
 
@@ -50,6 +63,7 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
           type={"inProgress"}
           onClick={() => onFilter("inProgress")}
           filtered={!!filter && filter !== "inProgress"}
+          testId={testId.inProgressSegment}
         />
       ) : null}
       {groupedTasks.todo && groupedTasks.todo.length > 0 ? (
@@ -59,6 +73,7 @@ const DistributionBar = ({ tasks, onFilter, filter }: TDistributionBar) => {
           type={"todo"}
           onClick={() => onFilter("todo")}
           filtered={!!filter && filter !== "todo"}
+          testId={testId.todoSegment}
         />
       ) : null}
     </div>

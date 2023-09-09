@@ -76,7 +76,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  // localStorage.clear()
   useEffect(() => {
     const parsedLocalStorageProjects = localVariables.localStorageProjects
       ? JSON.parse(localVariables.localStorageProjects)
